@@ -14,7 +14,7 @@ import { Storage } from '@ionic/storage';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: any = HomePage;
+  rootPage: string = 'SignUpPage';
 
   pages: Array<{ title: string, component: any }>;
   user: any;
