@@ -129,10 +129,9 @@
 
       <ion-row justify-content-center>
         <ion-col col-9>
-          <button ion-button full [disabled]="!reactiveForm.valid">Register</button>
+          <button ion-button full [disabled]="!reactiveForm.valid" (click)="register()">Register</button>
         </ion-col>
       </ion-row>
-      {{reactiveForm.values | json}}
     </ion-grid>
   </form>
 

@@ -13,7 +13,9 @@ export class ToasterProvider {
 
   public toast:any
 
-  constructor(private toaster:ToastController) { }
+  constructor(private toaster:ToastController) { 
+    console.log('Hello ToasterProvider');
+  }
 
   async present(config){
     try {

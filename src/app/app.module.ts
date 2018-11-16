@@ -19,7 +19,6 @@ import { MenuChangerProvider } from '../providers/menu-changer/menu-changer';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
     ListPage
   ],
   imports: [
@@ -32,7 +31,6 @@ import { MenuChangerProvider } from '../providers/menu-changer/menu-changer';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
     ListPage
   ],
   providers: [

@@ -61,4 +61,8 @@ export class LoginPage {
     )
   }
 
+  gotoRegister(): void {
+    this.navCtrl.push('SignUpPage');
+  }
+
 }
