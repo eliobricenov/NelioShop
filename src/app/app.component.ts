@@ -1,4 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { MenuChangerProvider } from './../providers/menu-changer/menu-changer';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -17,8 +18,9 @@ export class MyApp {
 
   pages: Array<{ title: string, component: any }>;
   user: any;
+  @ViewChild('profile') profileImg: any;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public storage: Storage) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public storage: Storage, public menuchange:MenuChangerProvider) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -27,13 +29,7 @@ export class MyApp {
       { title: 'Mi Carrito', component: ListPage }
     ];
 
-    this.user = {
-      username: 'namesty',
-      firstname: 'Nestor',
-      lastname: 'Amesty',
-      email: 'nestor09amesty@gmail.com',
-      img: '../assets/imgs/profile.png',
-    }
+    console.log(this.profileImg)
 
   }
 
@@ -44,6 +40,10 @@ export class MyApp {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  altImage(profile){
+
   }
 
   openPage(page) {

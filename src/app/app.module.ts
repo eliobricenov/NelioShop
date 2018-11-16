@@ -10,6 +10,11 @@ import { ListPage } from '../pages/list/list';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { IonicStorageModule } from '@ionic/storage';
+import { GetConfigProvider } from '../providers/get-config/get-config';
+import { UserProvider } from '../providers/user/user';
+import { ToasterProvider } from '../providers/toaster/toaster';
+import { HttpClientModule } from '@angular/common/http';
+import { MenuChangerProvider } from '../providers/menu-changer/menu-changer';
 
 @NgModule({
   declarations: [
@@ -20,6 +25,7 @@ import { IonicStorageModule } from '@ionic/storage';
   imports: [
     BrowserModule,
     LoginPageModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -32,7 +38,11 @@ import { IonicStorageModule } from '@ionic/storage';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GetConfigProvider,
+    UserProvider,
+    ToasterProvider,
+    MenuChangerProvider
   ]
 })
 export class AppModule {}
