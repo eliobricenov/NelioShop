@@ -23,4 +23,8 @@ export class HomePage {
     )
   }
 
+  gotoLogin(){
+    this.navCtrl.push('LoginPage')
+  }
+
 }
