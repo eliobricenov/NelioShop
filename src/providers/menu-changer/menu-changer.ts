@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -10,12 +11,11 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class MenuChangerProvider {
 
-  public user = {
-    username: 'namesty',
-    firstName: 'Nestor',
-    lastName: 'Amesty',
-    email: 'nestor09amesty@gmail.com',
-    img: '../assets/imgs/profile.png',
+  public user:any = {
+    username: '',
+    firstName: '',
+    lastName: '',
+    email: ''
   }
 
   constructor(public http: HttpClient) {

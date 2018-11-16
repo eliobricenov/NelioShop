@@ -9,7 +9,7 @@
     <ion-grid padding-top>
       <ion-row justify-content-center id="imageRow">
         <ion-col col-12>
-              <img #profile [src]="menuchange.user.img" (onerror)="altImage(profile)">
+              <img #profile src="../assets/imgs/profile.png">
         </ion-col>
       </ion-row>
     </ion-grid>
@@ -39,7 +39,7 @@
       <button ion-button full>
           Editar Perfil
         </button>
-        <button ion-button full>
+        <button ion-button full menuClose (click)="closeSession()">
             Cerrar Sesión
           </button>
     </ion-item-group>

@@ -1,6 +1,6 @@
 import { MenuChangerProvider } from './../providers/menu-changer/menu-changer';
 import { Component, ViewChild, ElementRef } from '@angular/core';
-import { Nav, Platform } from 'ionic-angular';
+import { Nav, Platform, NavController } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
@@ -29,8 +29,6 @@ export class MyApp {
       { title: 'Mi Carrito', component: ListPage }
     ];
 
-    console.log(this.profileImg)
-
   }
 
   initializeApp() {
@@ -44,11 +42,20 @@ export class MyApp {
 
   altImage(profile){
 
+    console.log(this.profileImg)
+    console.log(profile)
+
   }
 
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  closeSession(){
+    this.storage.clear().then((val:any)=>{
+      this.nav.push("LoginPage")
+    })
   }
 }

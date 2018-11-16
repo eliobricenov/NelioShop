@@ -10,17 +10,17 @@ import { NavController } from 'ionic-angular';
 export class HomePage {
 
   constructor(public navCtrl: NavController, public storage:Storage, public menuChanger:MenuChangerProvider) {
-    
   }
 
   ionViewDidEnter(){
+    console.log("DidLoad")
     this.storage.get('userData').then(
       (val: any) => {
         console.log(val)
         if(val){
           this.menuChanger.user = val;
         }else{
-          
+          this.navCtrl.push("LoginPage")
         }
       }
     )
