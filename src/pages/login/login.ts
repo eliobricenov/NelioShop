@@ -62,6 +62,7 @@ export class LoginPage {
   }
 
   gotoRegister(): void {
+    console.log(this.navCtrl)
     this.navCtrl.push('SignUpPage');
   }
 
