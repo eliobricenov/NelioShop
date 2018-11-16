@@ -2006,6 +2006,11 @@ ionic-angular@3.9.2:
   resolved "https://registry.yarnpkg.com/ionic-angular/-/ionic-angular-3.9.2.tgz#75053e4a422aaae7d7cd668cc92cfd5cb29d38cc"
   integrity sha512-BEZ6magY1i5GwM9ki/MOpszUz62+g518HsGICtw9TE1D4v9Eb6n/o7e+X0vtvpK4TdouFjQ8r5XA9VPAKW9/+Q==
 
+ionic-cli@^0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/ionic-cli/-/ionic-cli-0.0.0.tgz#d56bdee069fb33804b9461f23f5e62042ee13025"
+  integrity sha1-1Wve4Gn7M4BLlGHyP15iBC7hMCU=
+
 ionicons@3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/ionicons/-/ionicons-3.0.0.tgz#40b8daf4fd7a31150bd002160f66496e22a98c3c"

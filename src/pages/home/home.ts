@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
@@ -7,8 +8,19 @@ import { NavController } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  user:any;
 
+  constructor(public navCtrl: NavController, storage:Storage) {
+    storage.get('userData').then(
+      (val: any) => {
+        console.log(val)
+        if(val){
+          this.user = val;
+        }else{
+          
+        }
+      }
+    )
   }
 
 }
