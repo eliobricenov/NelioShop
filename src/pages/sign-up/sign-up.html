@@ -15,68 +15,98 @@
 
 <ion-content>
 
-  <ion-grid>
+  <form [formGroup]="reactiveForm">
+    <ion-grid>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label floating>Name</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label floating>Last Name</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+          <ion-item>
+            <ion-label floating>Name</ion-label>
+            <ion-input type="text" formControlName="name"></ion-input>
+          </ion-item>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label floating>Username</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+          <ion-item no-lines *ngIf="name.invalid && (name.touched || name.dirty)">
+            <span *ngIf="name.hasError('required')" class="error-message">This field can't be empty</span>
+          </ion-item>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label floating>Email</ion-label>
-          <ion-input type="text"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+        </ion-col>
+      </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label floating>Password</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col>
 
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label floating>Confirm Password</ion-label>
-          <ion-input type="password"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
+          <ion-item>
+            <ion-label floating>Last Name</ion-label>
+            <ion-input type="text" formControlName="lastName"></ion-input>
+          </ion-item>
 
-    <ion-row>
-      <ion-col size="11">
-        <button ion-button full>Register</button>
-      </ion-col>
-    </ion-row>
+          <ion-item no-lines *ngIf="lastName.invalid && (lastName.touched || lastName.dirty)">
+            <span *ngIf="lastName.hasError('required')" class="error-message">This field can't be empty</span>
+          </ion-item>
 
-  </ion-grid>
+        </ion-col>
+      </ion-row>
 
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>Username</ion-label>
+            <ion-input type="text" formControlName="username"></ion-input>
+          </ion-item>
+
+          <ion-item no-lines *ngIf="username.invalid && (username.touched || username.dirty)">
+            <span *ngIf="username.hasError('required')" class="error-message">This field can't be empty</span>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+
+          <ion-item>
+            <ion-label floating>Email</ion-label>
+            <ion-input type="text" formControlName="email"></ion-input>
+          </ion-item>
+
+          <ion-item no-lines *ngIf="email.invalid && (email.dirty || email.touched)">
+            <span *ngIf="email.hasError('required')" class="error-message">
+              This field can't be empty
+            </span>
+
+            <span *ngIf="email.hasError('pattern')" class="error-message">
+              The email needs a correct format
+            </span>
+          </ion-item>
+
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label floating>Confirm Password</ion-label>
+            <ion-input type="password"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="11">
+          <button ion-button full>Register</button>
+        </ion-col>
+      </ion-row>
+
+    </ion-grid>
+  </form>
 </ion-content>
