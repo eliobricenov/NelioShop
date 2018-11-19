@@ -1,3 +1,4 @@
+import { ComponentsModule } from './../components/components.module';
 import { LoginPageModule } from './../pages/login/login.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -15,6 +16,7 @@ import { UserProvider } from '../providers/user/user';
 import { ToasterProvider } from '../providers/toaster/toaster';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuChangerProvider } from '../providers/menu-changer/menu-changer';
+import { ProductsProvider } from '../providers/products/products';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,8 @@ import { MenuChangerProvider } from '../providers/menu-changer/menu-changer';
     GetConfigProvider,
     UserProvider,
     ToasterProvider,
-    MenuChangerProvider
+    MenuChangerProvider,
+    ProductsProvider
   ]
 })
 export class AppModule {}

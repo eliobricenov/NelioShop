@@ -23,6 +23,18 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public storage: Storage, public menuchange:MenuChangerProvider) {
     this.initializeApp();
 
+    // TESTING
+    /*this.menuchange.user = {
+      username: 'namesty',
+      firstName: 'Nestor',
+      lastName: 'Amesty',
+      email: 'namesty@cps.la'
+    }
+
+    this.storage.set('userData', this.menuchange.user).then((res:any)=>{console.log('done')})
+*/
+    //END TESTING
+    
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },

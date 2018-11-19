@@ -13,18 +13,13 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <h2 text-center margin-bottom>{{menuchange.user.firstName + ' '+ menuchange.user.lastName}}</h2>
-    <ion-item-group padding-top>
+    <h4 text-center margin-bottom>{{menuchange.user.firstName + ' '+ menuchange.user.lastName}}</h4>
+    <ion-item-group>
       <ion-item-divider color="light">Información Personal</ion-item-divider>
       <ion-item>
-        <ion-icon name="key" item-start></ion-icon>
+        <ion-icon name="person" item-start></ion-icon>
         <h2>Usuario:</h2>
         <p>{{menuchange.user.username}}</p>
-      </ion-item>
-      <ion-item>
-        <ion-icon name="person" item-start></ion-icon>
-        <h2>Nombre:</h2>
-        <p>{{menuchange.user.firstName +' '+ menuchange.user.lastName}}</p>
       </ion-item>
       <ion-item>
         <ion-icon name="mail" item-start></ion-icon>
