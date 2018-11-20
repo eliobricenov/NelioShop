@@ -14,7 +14,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'see-profile.html',
 })
 export class SeeProfilePage {
-  userData:object = {}
+  userData:object = {};
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.userData = this.navParams.get('userData');
