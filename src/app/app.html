@@ -6,11 +6,38 @@
   </ion-header>
 
   <ion-content>
-    <ion-list>
+    <ion-grid padding-top>
+      <ion-row justify-content-center id="imageRow">
+        <ion-col col-12>
+              <img #profile src="../assets/imgs/profile.png">
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <h4 text-center margin-bottom>{{menuchange.user.firstName + ' '+ menuchange.user.lastName}}</h4>
+    <ion-item-group>
+      <ion-item-divider color="light">Información Personal</ion-item-divider>
+      <ion-item>
+        <ion-icon name="person" item-start></ion-icon>
+        <h2>Usuario:</h2>
+        <p>{{menuchange.user.username}}</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="mail" item-start></ion-icon>
+        <h2>E-mail:</h2>
+        <p>{{menuchange.user.email}}</p>
+      </ion-item>
+      <ion-item-divider color="light">Navegar</ion-item-divider>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        {{p.title}}
+        <p>{{p.title}}</p>
       </button>
-    </ion-list>
+      <ion-item-divider color="light"></ion-item-divider>
+      <button ion-button full>
+          Editar Perfil
+        </button>
+        <button ion-button full menuClose (click)="closeSession()">
+            Cerrar Sesión
+          </button>
+    </ion-item-group>
   </ion-content>
 
 </ion-menu>
