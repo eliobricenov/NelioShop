@@ -7,12 +7,34 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>profile</ion-title>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Mi cuenta</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+  <ion-list no-lines>
+
+    <ion-list-header>
+      Configuración
+    </ion-list-header>
+
+    <button ion-item (click)="goToData()">
+      <ion-icon name='person' item-start></ion-icon>
+      Mis datos
+    </button>
+
+    <button ion-item (click)="goToSecurity()">
+      <ion-icon name='lock' item-start></ion-icon>
+      Seguridad
+    </button>
+
+  </ion-list>
+
 
 </ion-content>

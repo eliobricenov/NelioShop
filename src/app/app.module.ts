@@ -4,7 +4,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -15,11 +14,14 @@ import { UserProvider } from '../providers/user/user';
 import { ToasterProvider } from '../providers/toaster/toaster';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuChangerProvider } from '../providers/menu-changer/menu-changer';
+import { ProfilePage } from '../pages/profile/profile';
+import { StorageProvider } from '../providers/storage/storage';
 
 @NgModule({
   declarations: [
     MyApp,
-    ListPage
+    ListPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { MenuChangerProvider } from '../providers/menu-changer/menu-changer';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    ListPage
+    ListPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
@@ -40,7 +43,8 @@ import { MenuChangerProvider } from '../providers/menu-changer/menu-changer';
     GetConfigProvider,
     UserProvider,
     ToasterProvider,
-    MenuChangerProvider
+    MenuChangerProvider,
+    StorageProvider
   ]
 })
 export class AppModule {}
