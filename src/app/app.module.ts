@@ -9,7 +9,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -24,11 +23,14 @@ import { ProductsProvider } from '../providers/products/products';
 import { ProductChangerProvider } from '../providers/product-changer/product-changer';
 import { CartProvider } from '../providers/cart/cart';
 import { CartChangerProvider } from '../providers/cart-changer/cart-changer';
+import { ProfilePage } from '../pages/profile/profile';
+import { StorageProvider } from '../providers/storage/storage';
 
 @NgModule({
   declarations: [
     MyApp,
     ListPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
@@ -45,6 +47,7 @@ import { CartChangerProvider } from '../providers/cart-changer/cart-changer';
   entryComponents: [
     MyApp,
     ListPage,
+    ProfilePage
   ],
   providers: [
     StatusBar,
@@ -58,6 +61,7 @@ import { CartChangerProvider } from '../providers/cart-changer/cart-changer';
     ProductChangerProvider,
     CartProvider,
     CartChangerProvider
+    StorageProvider
   ]
 })
 export class AppModule {}

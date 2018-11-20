@@ -18,7 +18,7 @@ import { ToasterProvider } from '../../providers/toaster/toaster';
 })
 export class LoginPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl:MenuController, public userProvider:UserProvider, public storage:Storage, public toast:ToasterProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public menuCtrl: MenuController, public userProvider: UserProvider, public storage: Storage, public toast: ToasterProvider) {
     menuCtrl.swipeEnable(false)
   }
 
@@ -26,7 +26,7 @@ export class LoginPage {
     console.log('ionViewDidLoad LoginPage');
   }
 
-  login(e,p){
+  login(e, p) {
     this.toast.present({
       message: 'Procesando...'
     });
