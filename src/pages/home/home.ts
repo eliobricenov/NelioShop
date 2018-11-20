@@ -31,4 +31,8 @@ export class HomePage {
     this.navCtrl.push('LoginPage')
   }
 
+  gotoSearch(){
+    this.navCtrl.push('SearchPage');
+  }
+
 }

@@ -1,40 +1,41 @@
-import { ProductChangerProvider } from './../product-changer/product-changer';
-import { Storage } from '@ionic/storage';
+import { CartChangerProvider } from './../cart-changer/cart-changer';
 import { GetConfigProvider } from './../get-config/get-config';
+import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+
 /*
-  Generated class for the ProductsProvider provider.
+  Generated class for the CartProvider provider.
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
 @Injectable()
-export class ProductsProvider {
+export class CartProvider {
 
   baseUrl: string;
   httpOptions: any
   token: any;
   
 
-  constructor(private http: HttpClient, private storage: Storage, getConfig:GetConfigProvider, public prodCh:ProductChangerProvider) {
-    console.log('Product Service called');
-    this.baseUrl = getConfig.getURL() + "product";
+  constructor(private http: HttpClient, private storage: Storage, getConfig:GetConfigProvider, private cartCh:CartChangerProvider) {
+    console.log('Cart Service called');
+    this.baseUrl = getConfig.getURL() + "cart";
   }
 
-  create(data) {
+  create(id, quantity) {
     return this.setUp(next => {
-      this.http.post(this.baseUrl, data, this.httpOptions).subscribe( (res:any) => {
-        this.prodCh.createProd(res.data);
+      this.http.post(this.baseUrl, id, this.httpOptions).subscribe( (res:any) => {
+        this.cartCh.createCartProd(res.data);
         next(res);
       });
     })
   }
 
-  update(data) {
+  update(id, quantity) {
     return this.setUp(next => {
-     this.http.put(this.baseUrl+"/"+data.id+"/", data, this.httpOptions).subscribe( (res:any) => {
-      this.prodCh.updateProd(data,res.data.id);
+     this.http.put(this.baseUrl+"/"+id+"/", quantity, this.httpOptions).subscribe( (res:any) => {
+      this.cartCh.updateCartProd(id,res.data.id);
       next(res.data)
       } );
     });
@@ -43,7 +44,7 @@ export class ProductsProvider {
   delete(data) {
     return this.setUp(next => {
       this.http.delete(this.baseUrl + "/" + data.id + "/", this.httpOptions).subscribe((res: any) => {
-        this.prodCh.deleteProd(data.id)
+        this.cartCh.deleteCartProd(data.id)
         next(res)
       });
     })
@@ -52,32 +53,7 @@ export class ProductsProvider {
   read() {
     this.setUp(next => {
       this.http.get(this.baseUrl, this.httpOptions).subscribe((res: any) => {
-        console.log(res);
-        this.prodCh.readProds(res.data);
-      });
-    })
-  }
-
-  getByName(name){
-    this.setUp(next => {
-      this.http.get(this.baseUrl+"/name/"+name+"/", this.httpOptions).subscribe((res: any) => {
-        this.prodCh.readProds(res.data);
-      });
-    })
-  }
-
-  getByCategory(cat){
-    this.setUp(next => {
-      this.http.get(this.baseUrl+"/category/"+cat+"/", this.httpOptions).subscribe((res: any) => {
-        this.prodCh.readProds(res.data);
-      });
-    })
-  }
-
-  getMyProducts(){
-    this.setUp(next => {
-      this.http.get(this.baseUrl, this.httpOptions).subscribe((res: any) => {
-        this.prodCh.readProds(res.data);
+        this.cartCh.readCartProds(res.data);
       });
     })
   }
@@ -117,5 +93,4 @@ export class ProductsProvider {
         .catch(err => rej(err))
     })
   }
-
 }

@@ -7,15 +7,20 @@
 
 
 <ion-content padding>
-    <ion-searchbar
-    [(ngModel)]="searchInput"
-    [showCancelButton]="shouldShowCancel"
-    (ionInput)="onInput($event)"
-    (ionCancel)="onCancel($event)">
-  </ion-searchbar>
+    <ion-navbar>
+        <button ion-button menuToggle>
+          <ion-icon name="menu"></ion-icon>
+        </button>
+        <ion-searchbar
+        [(ngModel)]="searchInput"
+        [showCancelButton]="shouldShowCancel"
+        (ionInput)="onInput($event)"
+        (ionCancel)="onCancel($event)">
+      </ion-searchbar>
+      </ion-navbar>
 
     <ion-list>
-        <ion-item *ngFor="let product of products">
+        <ion-item *ngFor="let product of prodCh.products; let i = index " (click)="gotoDetail(i)">
             <ion-thumbnail item-start>
               <img src="img/thumbnail-totoro.png">
             </ion-thumbnail>
