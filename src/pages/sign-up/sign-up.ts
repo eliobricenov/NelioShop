@@ -43,6 +43,7 @@ export class SignUpPage {
             message: 'Registrado exitosamente',
             duration: 2000
           })
+          this.navCtrl.goToRoot({});
         }
       },
       (err: any) => {
