@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>add-product</ion-title>
+    <ion-title>Nuevo Producto</ion-title>
     <ion-buttons end>
       <button ion-button (click)="dismiss()">
         <ion-icon name="close"></ion-icon>
@@ -19,5 +19,28 @@
 
 
 <ion-content padding>
+  <ion-list>
+    <ion-item>
+        <ion-label floating>Nombre</ion-label>
+        <ion-input type="text" [(ngModel)]="product.name"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Descripción</ion-label>
+  <ion-input type="text" [(ngModel)]="product.description"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Cantidad</ion-label>
+        <ion-input type="number" min="1" [(ngModel)]="product.quantity"></ion-input>
+    </ion-item>
+    <button padding ion-button (click)="chooseImage()">Seleccionar imagen...</button>
+    <ion-item>
+        <h4>Vista Previa</h4>
+        <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
+      </ion-item>
+  </ion-list>
 
+  <ion-fab bottom right (click)="confirm()">
+      <button ion-fab><ion-icon name="check"></ion-icon></button>
+    </ion-fab>
+ 
 </ion-content>

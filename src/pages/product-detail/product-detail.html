@@ -8,6 +8,11 @@
 
   <ion-navbar>
     <ion-title>Detalle de Producto</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)="dismiss()">
+          <ion-icon name="close"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -17,15 +22,15 @@
   <div class="image"></div>
   <h2>{{product.name}}</h2>
   <p>por {{product.vendor}}</p>
-  <h1>{{product.price}}</h1>
+  <h1>{{product.price}} BsS.</h1>
   <p>{{product.quantity}} disponibles</p>
 
-  <ion-item>
+  <ion-item *ngIf="!mine">
     <ion-label>Cantidad</ion-label>
     <ion-input [(ngModel)]="quantity" type="number" min="1" [max]="product.quantity"></ion-input>
   </ion-item>
 
-  <button ion-button full (click)="addToCart()">Agregar al carrito</button>
+  <button *ngIf="!mine" ion-button full (click)="addToCart()">Agregar al carrito</button>
 
   <ion-item>
     <ion-label>Descripción</ion-label>

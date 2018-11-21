@@ -60,9 +60,6 @@ export class CartProvider {
 
   setUp(callback) {
     return new Promise((next, error) => {
-      if (this.token) {
-        return callback(next);
-      }
 
       this.getToken()
         .then(token => {

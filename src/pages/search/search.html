@@ -20,8 +20,8 @@
       </ion-navbar>
 
     <ion-list>
-        <ion-item *ngFor="let product of prodCh.products; let i = index " (click)="gotoDetail(i)">
-            <ion-thumbnail item-start>
+        <ion-item *ngFor="let product of prodCh.products; let i = index ">
+            <ion-thumbnail item-start (click)="gotoDetail(i)">
               <img src="img/thumbnail-totoro.png">
             </ion-thumbnail>
             <h2>{{product.name}}</h2>

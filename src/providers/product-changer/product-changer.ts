@@ -10,18 +10,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ProductChangerProvider {
 
-  public products: any = [
-    {
-      id:'3',
-      name:'Product 1',
-      vendor: 'Nestor',
-      price: '8000.bs',
-      category: 'Sports',
-      description: 'Very useful product',
-      image: '',
-      quantity: 5
-    }
-  ]
+  public products: any = []
 
   constructor() {
     console.log('Hello ProductChangerProvider Provider');
@@ -47,6 +36,7 @@ export class ProductChangerProvider {
 
    readProds(d){
      this.products = d;
+     console.log(this.products)
    }
 
    createProd(d){

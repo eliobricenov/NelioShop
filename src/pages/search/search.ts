@@ -1,9 +1,11 @@
+import { ProductChangerProvider } from './../../providers/product-changer/product-changer';
+import { ProductDetailPage } from './../product-detail/product-detail';
 
 import { ProductsProvider } from './../../providers/products/products';
-import { ProductChangerProvider } from './../../providers/product-changer/product-changer';
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { Component } from '@angular/core';
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { ActionSheetController } from 'ionic-angular';
 /**
  * Generated class for the SearchPage page.
  *
@@ -20,13 +22,14 @@ export class SearchPage {
 
   searchInput:any;
   shouldShowCancel:boolean = false;
+  categorySearch:any = 'all'
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public prodCh:ProductChangerProvider, public prodService:ProductsProvider) {
+  constructor(public actionSheetCtrl:ActionSheetController, public modalCtrl:ModalController, public navCtrl: NavController, public navParams: NavParams, public prodCh:ProductChangerProvider, public prodService:ProductsProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SearchPage');
-    
+    this.prodService.read()
   }
 
   ionViewDidEnter(){
@@ -34,7 +37,11 @@ export class SearchPage {
   }
 
   onInput(e){
-    this.prodService.getByName(e.target.value);
+    if(e.target.value == ''){
+      this.prodService.read()
+    }else{
+      this.prodService.getByName(e.target.value);
+    }
   }
 
   onCancel(e){
@@ -42,9 +49,12 @@ export class SearchPage {
   }
 
   gotoDetail(e){
-    this.navCtrl.push('ProductDetailPage',{
-      product: this.prodCh.getByIndex(e)
-    })
+    const modal = this.modalCtrl.create(ProductDetailPage,{
+      product: this.prodCh.getByIndex(e),
+      mine: false
+    });
+    modal.present();
   }
+
 
 }

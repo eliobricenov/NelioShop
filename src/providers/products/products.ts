@@ -1,7 +1,10 @@
+import { MenuChangerProvider } from './../menu-changer/menu-changer';
 import { ProductChangerProvider } from './../product-changer/product-changer';
 import { Storage } from '@ionic/storage';
 import { GetConfigProvider } from './../get-config/get-config';
 import { HttpClient } from '@angular/common/http';
+import { LoginPage } from '../../pages/login/login';
+
 import { Injectable } from '@angular/core';
 /*
   Generated class for the ProductsProvider provider.
@@ -19,7 +22,8 @@ export class ProductsProvider {
 
   constructor(private http: HttpClient, private storage: Storage, getConfig:GetConfigProvider, public prodCh:ProductChangerProvider) {
     console.log('Product Service called');
-    this.baseUrl = getConfig.getURL() + "product";
+    this.baseUrl = getConfig.getURL() + "product/";
+    this.token = undefined;
   }
 
   create(data) {
@@ -33,17 +37,17 @@ export class ProductsProvider {
 
   update(data) {
     return this.setUp(next => {
-     this.http.put(this.baseUrl+"/"+data.id+"/", data, this.httpOptions).subscribe( (res:any) => {
+     this.http.put(this.baseUrl+data.id+"/", data, this.httpOptions).subscribe( (res:any) => {
       this.prodCh.updateProd(data,res.data.id);
       next(res.data)
       } );
     });
   }
 
-  delete(data) {
+  delete(id) {
     return this.setUp(next => {
-      this.http.delete(this.baseUrl + "/" + data.id + "/", this.httpOptions).subscribe((res: any) => {
-        this.prodCh.deleteProd(data.id)
+      this.http.delete(this.baseUrl + id + "/", this.httpOptions).subscribe((res: any) => {
+        this.prodCh.deleteProd(id)
         next(res)
       });
     })
@@ -51,16 +55,20 @@ export class ProductsProvider {
 
   read() {
     this.setUp(next => {
+      
+    console.log(this.token)
       this.http.get(this.baseUrl, this.httpOptions).subscribe((res: any) => {
         console.log(res);
         this.prodCh.readProds(res.data);
+      }, (err)=>{
+        console.log(err)
       });
     })
   }
 
   getByName(name){
     this.setUp(next => {
-      this.http.get(this.baseUrl+"/name/"+name+"/", this.httpOptions).subscribe((res: any) => {
+      this.http.get(this.baseUrl+"name/"+name+"/", this.httpOptions).subscribe((res: any) => {
         this.prodCh.readProds(res.data);
       });
     })
@@ -68,7 +76,7 @@ export class ProductsProvider {
 
   getByCategory(cat){
     this.setUp(next => {
-      this.http.get(this.baseUrl+"/category/"+cat+"/", this.httpOptions).subscribe((res: any) => {
+      this.http.get(this.baseUrl+"category/"+cat+"/", this.httpOptions).subscribe((res: any) => {
         this.prodCh.readProds(res.data);
       });
     })
@@ -76,7 +84,9 @@ export class ProductsProvider {
 
   getMyProducts(){
     this.setUp(next => {
-      this.http.get(this.baseUrl, this.httpOptions).subscribe((res: any) => {
+      console.log(this.token,this.httpOptions)
+      this.http.get(this.baseUrl+"personal", this.httpOptions).subscribe((res: any) => {
+        console.log(res.data)
         this.prodCh.readProds(res.data);
       });
     })
@@ -84,10 +94,6 @@ export class ProductsProvider {
 
   setUp(callback) {
     return new Promise((next, error) => {
-      if (this.token) {
-        return callback(next);
-      }
-
       this.getToken()
         .then(token => {
           this.token = token;
@@ -99,7 +105,7 @@ export class ProductsProvider {
           }
           callback(next);
         })
-        .catch(err => {})
+        .catch(err => {console.log(err)})
     });
 
   }

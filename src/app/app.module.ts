@@ -1,3 +1,4 @@
+import { ProductDetailPageModule } from './../pages/product-detail/product-detail.module';
 import { AddProductPageModule } from './../pages/add-product/add-product.module';
 import { SearchPageModule } from './../pages/search/search.module';
 import { MyProductsPageModule } from './../pages/my-products/my-products.module';
@@ -25,6 +26,9 @@ import { CartProvider } from '../providers/cart/cart';
 import { CartChangerProvider } from '../providers/cart-changer/cart-changer';
 import { ProfilePage } from '../pages/profile/profile';
 import { StorageProvider } from '../providers/storage/storage';
+import { Camera } from '@ionic-native/camera';
+import { FileUploadOptions, FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,7 @@ import { StorageProvider } from '../providers/storage/storage';
     MyCartPageModule,
     MyProductsPageModule,
     SearchPageModule,
+    ProductDetailPageModule,
     AddProductPageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
@@ -60,8 +65,12 @@ import { StorageProvider } from '../providers/storage/storage';
     ProductsProvider,
     ProductChangerProvider,
     CartProvider,
-    CartChangerProvider
-    StorageProvider
+    CartChangerProvider,
+    StorageProvider,
+    StatusBar,
+  FileTransfer,
+  File,
+  Camera
   ]
 })
 export class AppModule {}

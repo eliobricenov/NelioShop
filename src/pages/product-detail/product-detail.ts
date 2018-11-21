@@ -28,10 +28,13 @@ export class ProductDetailPage {
     quantity: 0
   };
 
+  mine:any = false;
+
   quantity:any = 1;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public cp:CartProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.product = navParams.get('product');
+    this.mine = navParams.get('mine');
     console.log(this.product)
   }
 
@@ -40,12 +43,10 @@ export class ProductDetailPage {
   }
 
   addToCart(){
-    this.cp.create(this.product.id, this.quantity).then((res: any) => {
-      console.log(res)
-      this.navCtrl.pop();
-    }, (err: any) => {
-      console.log(err)
-    })
+  }
+
+  dismiss(){
+    this.navCtrl.pop();
   }
 
 }
