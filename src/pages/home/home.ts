@@ -1,3 +1,4 @@
+import { StorageProvider } from './../../providers/storage/storage';
 import { MenuChangerProvider } from './../../providers/menu-changer/menu-changer';
 import { Storage } from '@ionic/storage';
 import { Component } from '@angular/core';
@@ -10,25 +11,26 @@ import { NavController, IonicPage } from 'ionic-angular';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, public storage:Storage, public menuChanger:MenuChangerProvider) {
+  constructor(public storageManager:StorageProvider,public navCtrl: NavController, public storage:Storage, public menuChanger:MenuChangerProvider) {
   }
 
-  ionViewDidEnter(){
-    console.log("DidLoad")
-    this.storage.get('userData').then(
-      (val: any) => {
-        console.log(val)
-        if(val){
-          this.menuChanger.user = val;
-        }else{
-          this.navCtrl.push("LoginPage")
-        }
-      }
-    )
+
+  async ionViewCanEnter() {
+    try {
+      this.menuChanger.user = await this.storageManager.getData();
+      return true;
+    } catch (error) {
+      this.navCtrl.push("LoginPage")
+      return false;
+    }
   }
 
   gotoLogin(){
     this.navCtrl.push('LoginPage')
+  }
+
+  gotoSearch(){
+    this.navCtrl.push('SearchPage');
   }
 
 }

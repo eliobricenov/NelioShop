@@ -12,10 +12,12 @@ import { Injectable } from '@angular/core';
 export class MenuChangerProvider {
 
   public user:any = {
+    id:'',
     username: '',
     firstName: '',
     lastName: '',
-    email: ''
+    email: '',
+    image: ''
   }
 
   constructor(public http: HttpClient) {
@@ -24,6 +26,7 @@ export class MenuChangerProvider {
 
   setUser(data){
     this.user = data;
+    console.log(this.user);
   }
 
 }

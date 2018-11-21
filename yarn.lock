@@ -78,10 +78,25 @@
   dependencies:
     tslib "^1.7.1"
 
+"@ionic-native/camera@^4.17.0":
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/camera/-/camera-4.17.0.tgz#0dbe80e5190d956307953ba65a5ea779479c9955"
+  integrity sha512-C/T7yEZ11kSrF89rJwoaRa3F/ez8Wuz7Htb9jW71GBdAEt/wjegKBUDwB+ij/r8dzlBkdNWh1m6ax4NfJUhYpQ==
+
 "@ionic-native/core@~4.15.0":
   version "4.15.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-4.15.0.tgz#4142bf76480607fc82fcdc2e3f0eae07bd63f5fb"
   integrity sha512-WlFcBktHnufiu+SB1u2GemEkDrXE94+LUkg59BQL1Tr0j+7EXcNY20JUUFCnQZP+uTJbUxaYZEa36B8UKBBpbA==
+
+"@ionic-native/file-transfer@^4.17.0":
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/file-transfer/-/file-transfer-4.17.0.tgz#e5256c788bf4680e81cd4354f7ae3f054e443fc1"
+  integrity sha512-GtCnjCMH02r5BLONYkPjcYDAXSHmrO9t8jPY5LoI29bx2B6vwX+NFBARHPNSFPEwRi1zZKs/J0uJ1hkhDzOvxg==
+
+"@ionic-native/file@^4.17.0":
+  version "4.17.0"
+  resolved "https://registry.yarnpkg.com/@ionic-native/file/-/file-4.17.0.tgz#d04deda00397ebf37035da6acdaf101ec4e614bc"
+  integrity sha512-16nqDPGY/dbtJCRHIra0DskghXWHbRYfJYGsYSioMWodqoDRLyjYYEc0Z1qZXL8Ei6X1IdmgtICgjC9gnsWRiw==
 
 "@ionic-native/splash-screen@~4.15.0":
   version "4.15.0"
@@ -995,6 +1010,21 @@ copy-descriptor@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/copy-descriptor/-/copy-descriptor-0.1.1.tgz#676f6eb3c39997c2ee1ac3a924fd6124748f578d"
   integrity sha1-Z29us8OZl8LuGsOpJP1hJHSPV40=
+
+cordova-plugin-camera@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-camera/-/cordova-plugin-camera-4.0.3.tgz#7373a5938318c86ccfd84e3713e2382d10fe076b"
+  integrity sha1-c3Olk4MYyGzP2E43E+I4LRD+B2s=
+
+cordova-plugin-file-transfer@^1.7.1:
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-file-transfer/-/cordova-plugin-file-transfer-1.7.1.tgz#a75d8be2ebc3bb9b23c5b1bbd199214ec267586b"
+  integrity sha1-p12L4uvDu5sjxbG70ZkhTsJnWGs=
+
+cordova-plugin-file@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/cordova-plugin-file/-/cordova-plugin-file-6.0.1.tgz#49606b8c15a5688d4728f92e4a7325a061de07f5"
+  integrity sha1-SWBrjBWlaI1HKPkuSnMloGHeB/U=
 
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
@@ -2140,6 +2170,13 @@ ionic-cli@^0.0.0:
   version "0.0.0"
   resolved "https://registry.yarnpkg.com/ionic-cli/-/ionic-cli-0.0.0.tgz#d56bdee069fb33804b9461f23f5e62042ee13025"
   integrity sha1-1Wve4Gn7M4BLlGHyP15iBC7hMCU=
+
+ionic-native@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/ionic-native/-/ionic-native-2.9.0.tgz#e9a36c850eda180918407c288e5d634978e32052"
+  integrity sha1-6aNshQ7aGAkYQHwojl1jSXjjIFI=
+  dependencies:
+    rxjs "5.0.1"
 
 ionicons@3.0.0:
   version "3.0.0"
@@ -3807,6 +3844,13 @@ run-async@^2.2.0:
   dependencies:
     is-promise "^2.1.0"
 
+rxjs@5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.0.1.tgz#3a69bdf9f0ca0a986303370d4708f72bdfac8356"
+  integrity sha1-Omm9+fDKCphjAzcNRwj3K9+sg1Y=
+  dependencies:
+    symbol-observable "^1.0.1"
+
 rxjs@5.5.11:
   version "5.5.11"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.11.tgz#f733027ca43e3bec6b994473be4ab98ad43ced87"
@@ -4287,6 +4331,11 @@ symbol-observable@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.0.1.tgz#8340fc4702c3122df5d22288f88283f513d3fdd4"
   integrity sha1-g0D8RwLDEi310iKI+IKD9RPT/dQ=
+
+symbol-observable@^1.0.1:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.2.0.tgz#c22688aed4eab3cdc2dfeacbb561660560a00804"
+  integrity sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==
 
 tapable@^0.2.7:
   version "0.2.8"

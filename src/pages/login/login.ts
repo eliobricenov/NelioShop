@@ -39,6 +39,7 @@ export class LoginPage {
     this.userProvider.login(data).subscribe(
       (res: any) => {
         if (res.status == 200) {
+          console.log(res);
           this.toast.dismiss()
           this.storage.set('userData', res.data)
           this.storage.set('token', res.token);
@@ -62,6 +63,7 @@ export class LoginPage {
   }
 
   gotoRegister(): void {
+    console.log(this.navCtrl)
     this.navCtrl.push('SignUpPage');
   }
 
