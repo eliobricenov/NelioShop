@@ -19,7 +19,7 @@ import { SeeProfilePage } from '../pages/see-profile/see-profile';
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage: string = 'HomePage';
+  rootPage: string = 'LoginPage';
 
   pages: Array<{ title: string, component: any }>;
   user: any;

@@ -34,6 +34,7 @@ import { SignUpPage } from '../pages/sign-up/sign-up';
 import { SeeProfilePage } from '../pages/see-profile/see-profile';
 import { ModifyProfilePage } from '../pages/modify-profile/modify-profile';
 import { ImagesProvider } from '../providers/images/images';
+import { HomePageModule } from '../pages/home/home.module';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { ImagesProvider } from '../providers/images/images';
     SearchPageModule,
     ProductDetailPageModule,
     AddProductPageModule,
+    HomePageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],

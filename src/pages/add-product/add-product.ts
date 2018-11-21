@@ -68,6 +68,7 @@ export class AddProductPage {
     if (!this.navParams.get('edit')) {
       this.prodService.create(this.product).then(
         (res: any) => {
+          this.navCtrl.pop()
           console.log(res)
         }, (err) => {
           console.log(err)
@@ -75,6 +76,7 @@ export class AddProductPage {
     } else {
       this.prodService.update(this.product).then(
         (res: any) => {
+          this.navCtrl.pop()
           console.log(res)
         }, (err) => {
           console.log(err)

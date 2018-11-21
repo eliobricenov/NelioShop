@@ -39,8 +39,8 @@ export class ProductsProvider {
   update(data) {
     return this.setUp(next => {
       this.http.put(this.baseUrl + data.id + "/", data, this.httpOptions).subscribe((res: any) => {
-        this.appendUrl(res.data)
-        this.prodCh.updateProd(res.data, res.data.id);
+        this.appendUrl(data)
+        this.prodCh.updateProd(data, res.data.id);
         next(res.data)
       });
     });

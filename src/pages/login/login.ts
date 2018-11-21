@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { ToasterProvider } from '../../providers/toaster/toaster';
+import { HomePage } from '../home/home';
 
 /**
  * Generated class for the LoginPage page.
@@ -43,7 +44,7 @@ export class LoginPage {
           this.toast.dismiss()
           this.storage.set('userData', res.data)
           this.storage.set('token', res.token);
-          this.navCtrl.goToRoot({})
+          this.navCtrl.setRoot(HomePage);
         }
       },
       (err: any) => {

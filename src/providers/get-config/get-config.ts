@@ -10,7 +10,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class GetConfigProvider {
 
-  baseUrl:any = "http://192.168.43.146:8000/"
+  baseUrl:any = "http://192.168.43.205:8000/"
 
   constructor(public http: HttpClient) {
     console.log('Hello GetConfigProvider Provider');

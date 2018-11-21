@@ -13,7 +13,8 @@
         </button>
         <ion-searchbar
         [(ngModel)]="searchInput"
-        [showCancelButton]="shouldShowCancel"
+        showCancelButton="false"
+        animated="false"
         (ionInput)="onInput($event)"
         (ionCancel)="onCancel($event)">
       </ion-searchbar>
