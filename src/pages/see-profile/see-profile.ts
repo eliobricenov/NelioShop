@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { ModifyProfilePage } from '../modify-profile/modify-profile';
+import { MenuChangerProvider } from '../../providers/menu-changer/menu-changer';
 
 /**
  * Generated class for the SeeProfilePage page.
@@ -15,10 +16,9 @@ import { ModifyProfilePage } from '../modify-profile/modify-profile';
   templateUrl: 'see-profile.html',
 })
 export class SeeProfilePage {
-  userData:object = {};
+  userData;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.userData = this.navParams.get('userData');
+  constructor(public navCtrl: NavController, public navParams: NavParams, private menuChanger: MenuChangerProvider) {
   }
 
   ionViewDidLoad() {

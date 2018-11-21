@@ -5,6 +5,7 @@ import { ToasterProvider } from '../../providers/toaster/toaster';
 import { UserProvider } from '../../providers/user/user';
 import { StorageProvider } from '../../providers/storage/storage';
 import { Storage } from '@ionic/storage';
+import { MenuChangerProvider } from '../../providers/menu-changer/menu-changer';
 
 /**
  * Generated class for the ModifyProfilePage page.
@@ -25,7 +26,7 @@ export class ModifyProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams,
     private fb: FormBuilder, private toast: ToasterProvider, private userProvider: UserProvider, 
-    private storageProvider: StorageProvider, private storage: Storage) {
+    private storageProvider: StorageProvider, private storage: Storage, private menuChanger: MenuChangerProvider) {
     this.userData = this.navParams.get('userData');
     this.setReactiveForm();
   }
@@ -48,13 +49,16 @@ export class ModifyProfilePage {
     this.userProvider.edit(data, storaged.id).subscribe(
       (res: any) => {
         console.warn(res);
+        const data = res.data;
         if (res.status == 200) {
           this.toast.present({
             message: 'Modificado exitosamente',
             duration: 2000
           })
-          this.storage.set('userData', res.data);
-          this.userData = res.data;
+          this.storage.set('userData', data);
+          this.menuChanger.user.username = data.username;
+          this.menuChanger.user.firstName = data.firstName;
+          this.menuChanger.user.lastName = data.lastName;
         }
       },
       (err: any) => {
@@ -77,10 +81,11 @@ export class ModifyProfilePage {
   }
 
   private setReactiveForm(): void {
+    const user = this.menuChanger.user;
     this.reactiveForm = this.fb.group({
-      name: [this.userData.firstName, Validators.required],
-      lastName: [this.userData.lastName, Validators.required],
-      username: [this.userData.username, Validators.required]
+      name: [user.firstName, Validators.required],
+      lastName: [user.lastName, Validators.required],
+      username: [user.username, Validators.required]
     });
   }
 

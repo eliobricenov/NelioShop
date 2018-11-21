@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class MenuChangerProvider {
 
-  public user:any = {
+  public user: any = {
     username: '',
     firstName: '',
     lastName: '',
@@ -22,7 +22,7 @@ export class MenuChangerProvider {
     console.log('Hello MenuChangerProvider Provider');
   }
 
-  setUser(data){
+  setUser(data) {
     this.user = data;
   }
 
