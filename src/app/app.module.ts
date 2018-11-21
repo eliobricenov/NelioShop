@@ -1,3 +1,10 @@
+
+import { ProductDetailPageModule } from './../pages/product-detail/product-detail.module';
+import { AddProductPageModule } from './../pages/add-product/add-product.module';
+import { SearchPageModule } from './../pages/search/search.module';
+import { MyProductsPageModule } from './../pages/my-products/my-products.module';
+import { MyCartPageModule } from './../pages/my-cart/my-cart.module';
+import { ComponentsModule } from './../components/components.module';
 import { LoginPageModule } from './../pages/login/login.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -14,11 +21,19 @@ import { UserProvider } from '../providers/user/user';
 import { ToasterProvider } from '../providers/toaster/toaster';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuChangerProvider } from '../providers/menu-changer/menu-changer';
+import { ProductsProvider } from '../providers/products/products';
+import { ProductChangerProvider } from '../providers/product-changer/product-changer';
+import { CartProvider } from '../providers/cart/cart';
+import { CartChangerProvider } from '../providers/cart-changer/cart-changer';
 import { ProfilePage } from '../pages/profile/profile';
 import { StorageProvider } from '../providers/storage/storage';
+import { Camera } from '@ionic-native/camera';
+import { FileUploadOptions, FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
+import { File } from '@ionic-native/file';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { SeeProfilePage } from '../pages/see-profile/see-profile';
 import { ModifyProfilePage } from '../pages/modify-profile/modify-profile';
+import { ImagesProvider } from '../providers/images/images';
 
 @NgModule({
   declarations: [
@@ -33,6 +48,11 @@ import { ModifyProfilePage } from '../pages/modify-profile/modify-profile';
     BrowserModule,
     LoginPageModule,
     HttpClientModule,
+    MyCartPageModule,
+    MyProductsPageModule,
+    SearchPageModule,
+    ProductDetailPageModule,
+    AddProductPageModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],
@@ -53,7 +73,16 @@ import { ModifyProfilePage } from '../pages/modify-profile/modify-profile';
     UserProvider,
     ToasterProvider,
     MenuChangerProvider,
-    StorageProvider
+    ProductsProvider,
+    ProductChangerProvider,
+    CartProvider,
+    CartChangerProvider,
+    StorageProvider,
+    StatusBar,
+  FileTransfer,
+  File,
+  Camera,
+    ImagesProvider
   ]
 })
 export class AppModule {}

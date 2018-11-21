@@ -1,3 +1,6 @@
+import { SearchPage } from './../pages/search/search';
+import { MyProductsPage } from './../pages/my-products/my-products';
+import { MyCartPage } from './../pages/my-cart/my-cart';
 import { MenuChangerProvider } from './../providers/menu-changer/menu-changer';
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Nav, Platform, NavController } from 'ionic-angular';
@@ -24,11 +27,24 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public storage: Storage, public menuchange:MenuChangerProvider) {
     this.initializeApp();
 
+    // TESTING
+    /*this.menuchange.user = {
+      username: 'namesty',
+      firstName: 'Nestor',
+      lastName: 'Amesty',
+      email: 'namesty@cps.la'
+    }
+
+    this.storage.set('userData', this.menuchange.user).then((res:any)=>{console.log('done')})
+*/
+    //END TESTING
+    
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'Mi Carrito', component: ListPage },
-      { title: 'Mi cuenta', component: ProfilePage}
+      { title: 'Buscar', component: SearchPage},
+      { title: 'Mi Carrito', component: MyCartPage },
+      { title: 'Mis publicaciones', component: MyProductsPage},
     ];
 
   }
