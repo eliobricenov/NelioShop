@@ -16,12 +16,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { MenuChangerProvider } from '../providers/menu-changer/menu-changer';
 import { ProfilePage } from '../pages/profile/profile';
 import { StorageProvider } from '../providers/storage/storage';
+import { SignUpPage } from '../pages/sign-up/sign-up';
+import { SeeProfilePage } from '../pages/see-profile/see-profile';
+import { ModifyProfilePage } from '../pages/modify-profile/modify-profile';
 
 @NgModule({
   declarations: [
     MyApp,
     ListPage,
-    ProfilePage
+    ProfilePage,
+    SignUpPage,
+    SeeProfilePage,
+    ModifyProfilePage
   ],
   imports: [
     BrowserModule,
@@ -34,7 +40,10 @@ import { StorageProvider } from '../providers/storage/storage';
   entryComponents: [
     MyApp,
     ListPage,
-    ProfilePage
+    ProfilePage,
+    SignUpPage,
+    SeeProfilePage,
+    ModifyProfilePage
   ],
   providers: [
     StatusBar,
