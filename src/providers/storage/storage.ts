@@ -15,7 +15,7 @@ export class StorageProvider {
     console.log('Hello StorageProvider Provider');
   }
 
-  public getToken(): Promise<object> {
+  public getToken(): Promise<any> {
     return new Promise((res, rej) => {
       this.storage.get('token')
         .then(token => {
@@ -30,7 +30,7 @@ export class StorageProvider {
     })
   }
 
-  public getData(): Promise<object> {
+  public getData(): Promise<any> {
     return new Promise((res, rej) => {
       this.storage.get('userData')
         .then(data => {
