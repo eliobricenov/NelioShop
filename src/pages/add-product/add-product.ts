@@ -1,10 +1,10 @@
-import { GetConfigProvider } from './../../providers/get-config/get-config';
+import { ImagesProvider } from './../../providers/images/images';
 import { ProductsProvider } from './../../providers/products/products';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, ActionSheetController } from 'ionic-angular';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import {LoadingController} from 'ionic-angular';
+import { LoadingController } from 'ionic-angular';
 
 
 /**
@@ -21,24 +21,28 @@ import {LoadingController} from 'ionic-angular';
 })
 export class AddProductPage {
 
-  imageURI:any;
-  imageFileName:any;
+  imageURI: any;
+  imageFileName: any;
 
-  product:any = {
-    id:'',
-    name:'',
-    description:'',
-    categoryId:'',
-    quantity:'',
-    image:'',
-    vendor:''
+  product: any = {
+    id: '',
+    name: '',
+    description: '',
+    price: '',
+    categoryId: '',
+    quantity: '',
+    image: '',
+    vendor: ''
   }
+
+  loader: any
 
   constructor(private transfer: FileTransfer,
     private camera: Camera,
     public loadingCtrl: LoadingController,
-    public navCtrl: NavController, public navParams: NavParams, 
-    public mc:ModalController, public prodService:ProductsProvider, public gc:GetConfigProvider) {
+    public navCtrl: NavController, public navParams: NavParams,
+    public mc: ModalController, public prodService: ProductsProvider,
+    public actionSheetCtrl: ActionSheetController, public imageProvider: ImagesProvider) {
   }
 
   ionViewDidLoad() {
@@ -49,66 +53,110 @@ export class AddProductPage {
     this.navCtrl.pop()
   }
 
-  ionViewDidEnter(){
-    
+  ionViewDidEnter() {
+    if (this.navParams.get('edit')) {
+      let p = this.navParams.get('product');
+      this.product = p;
+      this.imageFileName = p.image
+    }
   }
 
   confirm(){
-    if(this.product.id==''){
+
+    console.log(this.product.image);
+    
+    if (!this.navParams.get('edit')) {
       this.prodService.create(this.product).then(
-        (res:any)=>{
+        (res: any) => {
           console.log(res)
-        }, (err)=>{
+        }, (err) => {
           console.log(err)
         })
-    }else{
+    } else {
       this.prodService.update(this.product).then(
-        (res:any)=>{
+        (res: any) => {
           console.log(res)
-        }, (err)=>{
+        }, (err) => {
           console.log(err)
         })
     }
+  }
+
+  takeImage() {
+    console.log("getting image")
+    const options: CameraOptions = {
+      quality: 70,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    console.log(options);
+
+    this.camera.getPicture(options).then((imageData) => {
+      console.log("GOT IT")
+      console.log(imageData)
+      this.imageFileName = 'data:image/jpeg;base64,' + imageData;
+      this.product.image = this.imageFileName;
+      console.log(this.imageFileName)
+    }, (err) => {
+      console.log(err);
+    });
   }
 
   chooseImage() {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+      quality: 70,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      saveToPhotoAlbum: false,
+      allowEdit: true,
+      targetWidth: 300,
+      targetHeight: 300
     }
-  
     this.camera.getPicture(options).then((imageData) => {
-      this.imageURI = imageData;
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64 (DATA_URL):
+      this.imageFileName = 'data:image/jpeg;base64,' + imageData;
+      this.product.image = this.imageFileName;
     }, (err) => {
-      console.log(err);
+      // Handle errory
     });
   }
-
   uploadFile() {
     let loader = this.loadingCtrl.create({
-      content: "Uploading..."
+      content: "Cargando imagen..."
     });
     loader.present();
-    const fileTransfer: FileTransferObject = this.transfer.create();
-  
-    let options: FileUploadOptions = {
-      fileKey: 'ionicfile',
-      fileName: 'ionicfile',
-      chunkedMode: false,
-      mimeType: "image/jpeg",
-      headers: {}
-    }
-  
-    fileTransfer.upload(this.imageURI, 'http://192.168.0.7:8080/api/uploadImage', options)
-      .then((data) => {
-      console.log(data+" Uploaded Successfully");
-      this.imageFileName = "http://192.168.0.7:8080/static/images/ionicfile.jpg"
-      loader.dismiss();
-    }, (err) => {
-      console.log(err);
-      loader.dismiss();
-    });
   }
+
+  actionPresent() {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          text: 'Tomar Foto',
+          handler: () => {
+            this.takeImage();
+          }
+        },
+        {
+          text: 'Escoger de la Galería',
+          handler: () => {
+            this.chooseImage()
+          }
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        }
+      ]
+    });
+
+    actionSheet.present();
+  }
+
+
 
 }

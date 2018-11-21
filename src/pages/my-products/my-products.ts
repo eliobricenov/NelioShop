@@ -36,6 +36,14 @@ export class MyProductsPage {
     modal.present();
   }
 
+  openEdit(i){
+    const modal = this.modalCtrl.create(AddProductPage,{
+      product: this.prodCh.getByIndex(i),
+      edit: true
+    });
+    modal.present();
+  }
+
   openDetail(x){
     const modal = this.modalCtrl.create(ProductDetailPage,{
       product: this.prodCh.getByIndex(x),
@@ -50,7 +58,7 @@ export class MyProductsPage {
         {
           text: 'Editar',
           handler: () => {
-            console.log('Editar clicked');
+            this.openEdit(i);
           }
         },
         {

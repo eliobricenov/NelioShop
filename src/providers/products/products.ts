@@ -18,9 +18,9 @@ export class ProductsProvider {
   baseUrl: string;
   httpOptions: any
   token: any;
-  
 
-  constructor(private http: HttpClient, private storage: Storage, getConfig:GetConfigProvider, public prodCh:ProductChangerProvider) {
+
+  constructor(private http: HttpClient, private storage: Storage, public getConfig: GetConfigProvider, public prodCh: ProductChangerProvider) {
     console.log('Product Service called');
     this.baseUrl = getConfig.getURL() + "product/";
     this.token = undefined;
@@ -28,7 +28,8 @@ export class ProductsProvider {
 
   create(data) {
     return this.setUp(next => {
-      this.http.post(this.baseUrl, data, this.httpOptions).subscribe( (res:any) => {
+      this.http.post(this.baseUrl, data, this.httpOptions).subscribe((res: any) => {
+        this.appendUrl(res.data)
         this.prodCh.createProd(res.data);
         next(res);
       });
@@ -37,10 +38,11 @@ export class ProductsProvider {
 
   update(data) {
     return this.setUp(next => {
-     this.http.put(this.baseUrl+data.id+"/", data, this.httpOptions).subscribe( (res:any) => {
-      this.prodCh.updateProd(data,res.data.id);
-      next(res.data)
-      } );
+      this.http.put(this.baseUrl + data.id + "/", data, this.httpOptions).subscribe((res: any) => {
+        this.appendUrl(res.data)
+        this.prodCh.updateProd(res.data, res.data.id);
+        next(res.data)
+      });
     });
   }
 
@@ -55,37 +57,43 @@ export class ProductsProvider {
 
   read() {
     this.setUp(next => {
-      
-    console.log(this.token)
+
+      console.log(this.token)
       this.http.get(this.baseUrl, this.httpOptions).subscribe((res: any) => {
         console.log(res);
+        this.appendUrl(res.data)
         this.prodCh.readProds(res.data);
-      }, (err)=>{
+        console.log(res.data);
+      }, (err) => {
         console.log(err)
       });
     })
   }
 
-  getByName(name){
+  getByName(name) {
     this.setUp(next => {
-      this.http.get(this.baseUrl+"name/"+name+"/", this.httpOptions).subscribe((res: any) => {
+      this.http.get(this.baseUrl + "search?name=" + name, this.httpOptions).subscribe((res: any) => {
+        this.appendUrl(res.data)
         this.prodCh.readProds(res.data);
       });
     })
   }
 
-  getByCategory(cat){
+  getByCategory(cat) {
     this.setUp(next => {
-      this.http.get(this.baseUrl+"category/"+cat+"/", this.httpOptions).subscribe((res: any) => {
+      this.http.get(this.baseUrl + "category/" + cat + "/", this.httpOptions).subscribe((res: any) => {
+        this.appendUrl(res.data)
         this.prodCh.readProds(res.data);
       });
     })
   }
 
-  getMyProducts(){
+  getMyProducts() {
     this.setUp(next => {
-      console.log(this.token,this.httpOptions)
-      this.http.get(this.baseUrl+"personal", this.httpOptions).subscribe((res: any) => {
+      console.log(this.token, this.httpOptions)
+      this.http.get(this.baseUrl + "personal", this.httpOptions).subscribe((res: any) => {
+        console.log(res.data)
+        this.appendUrl(res.data)
         console.log(res.data)
         this.prodCh.readProds(res.data);
       });
@@ -105,7 +113,7 @@ export class ProductsProvider {
           }
           callback(next);
         })
-        .catch(err => {console.log(err)})
+        .catch(err => { console.log(err) })
     });
 
   }
@@ -122,6 +130,12 @@ export class ProductsProvider {
         })
         .catch(err => rej(err))
     })
+  }
+
+  appendUrl(arr){
+    for(let i=0; i<arr.length;i++){
+      arr[i].image = this.getConfig.getURL() + arr[i].image
+    }
   }
 
 }

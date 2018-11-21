@@ -32,10 +32,14 @@
         <ion-label floating>Cantidad</ion-label>
         <ion-input type="number" min="1" [(ngModel)]="product.quantity"></ion-input>
     </ion-item>
-    <button padding ion-button (click)="chooseImage()">Seleccionar imagen...</button>
+    <ion-item>
+        <ion-label floating>Precio en BsS.</ion-label>
+        <ion-input type="number" min="1" [(ngModel)]="product.price"></ion-input>
+    </ion-item>
+    <button padding ion-button (click)="actionPresent()">Seleccionar imagen...</button>
     <ion-item>
         <h4>Vista Previa</h4>
-        <img src="{{imageFileName}}" *ngIf="imageFileName" alt="Ionic File" width="300" />
+        <img [src]="imageFileName" *ngIf="imageFileName" alt="Ionic File" width="300" />
       </ion-item>
   </ion-list>
 

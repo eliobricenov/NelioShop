@@ -1,3 +1,4 @@
+
 import { ProductDetailPageModule } from './../pages/product-detail/product-detail.module';
 import { AddProductPageModule } from './../pages/add-product/add-product.module';
 import { SearchPageModule } from './../pages/search/search.module';
@@ -32,6 +33,7 @@ import { File } from '@ionic-native/file';
 import { SignUpPage } from '../pages/sign-up/sign-up';
 import { SeeProfilePage } from '../pages/see-profile/see-profile';
 import { ModifyProfilePage } from '../pages/modify-profile/modify-profile';
+import { ImagesProvider } from '../providers/images/images';
 
 @NgModule({
   declarations: [
@@ -79,7 +81,8 @@ import { ModifyProfilePage } from '../pages/modify-profile/modify-profile';
     StatusBar,
   FileTransfer,
   File,
-  Camera
+  Camera,
+    ImagesProvider
   ]
 })
 export class AppModule {}

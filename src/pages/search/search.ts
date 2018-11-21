@@ -39,7 +39,7 @@ export class SearchPage {
   onInput(e){
     if(e.target.value == ''){
       this.prodService.read()
-    }else{
+    }else if(e.target.value.length>2){
       this.prodService.getByName(e.target.value);
     }
   }

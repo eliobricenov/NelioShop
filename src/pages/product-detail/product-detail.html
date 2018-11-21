@@ -19,7 +19,9 @@
 
 
 <ion-content padding>
-  <div class="image"></div>
+  <div class="image">
+    <img [src]="product.image">
+  </div>
   <h2>{{product.name}}</h2>
   <p>por {{product.vendor}}</p>
   <h1>{{product.price}} BsS.</h1>
