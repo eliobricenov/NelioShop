@@ -31,8 +31,8 @@
         <p>{{p.title}}</p>
       </button>
       <ion-item-divider color="light"></ion-item-divider>
-      <button ion-button full>
-          Editar Perfil
+      <button ion-button full menuClose (click)="myProfile()" >
+          Mi Perfil
         </button>
         <button ion-button full menuClose (click)="closeSession()">
             Cerrar Sesión

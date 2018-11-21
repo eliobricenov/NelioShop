@@ -11,12 +11,8 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class MenuChangerProvider {
 
-<<<<<<< HEAD
-  public user: any = {
-=======
   public user:any = {
     id:'',
->>>>>>> 5a32d150d0076701ef8034a4359e0043b642e5e4
     username: '',
     firstName: '',
     lastName: '',

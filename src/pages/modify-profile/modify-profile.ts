@@ -59,6 +59,7 @@ export class ModifyProfilePage {
           this.menuChanger.user.username = data.username;
           this.menuChanger.user.firstName = data.firstName;
           this.menuChanger.user.lastName = data.lastName;
+          this.navCtrl.pop();
         }
       },
       (err: any) => {
