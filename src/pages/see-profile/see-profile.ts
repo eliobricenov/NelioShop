@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ModifyProfilePage } from '../modify-profile/modify-profile';
 
 /**
  * Generated class for the SeeProfilePage page.
@@ -18,16 +19,20 @@ export class SeeProfilePage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.userData = this.navParams.get('userData');
-    console.warn(this.navParams);
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad SeeProfilePage');
-    console.warn(this.userData);
   }
 
   ionViewWillLoad() {
     this.userData = this.navParams.get('userData');
+  }
+
+  goToEditPage() {
+    this.navCtrl.push(ModifyProfilePage, {
+      userData: this.userData
+    });
   }
 
 }

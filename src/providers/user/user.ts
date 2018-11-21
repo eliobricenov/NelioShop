@@ -26,4 +26,8 @@ export class UserProvider {
     return this.http.post(this.baseUrl+'person',data)
   }
 
+  edit(data, id): any {
+    return this.http.put(`${this.baseUrl}person/${id}`, data);
+  }
+
 }

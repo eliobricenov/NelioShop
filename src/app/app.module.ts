@@ -29,12 +29,18 @@ import { StorageProvider } from '../providers/storage/storage';
 import { Camera } from '@ionic-native/camera';
 import { FileUploadOptions, FileTransfer, FileTransferObject } from '@ionic-native/file-transfer';
 import { File } from '@ionic-native/file';
+import { SignUpPage } from '../pages/sign-up/sign-up';
+import { SeeProfilePage } from '../pages/see-profile/see-profile';
+import { ModifyProfilePage } from '../pages/modify-profile/modify-profile';
 
 @NgModule({
   declarations: [
     MyApp,
     ListPage,
-    ProfilePage
+    ProfilePage,
+    SignUpPage,
+    SeeProfilePage,
+    ModifyProfilePage
   ],
   imports: [
     BrowserModule,
@@ -52,7 +58,10 @@ import { File } from '@ionic-native/file';
   entryComponents: [
     MyApp,
     ListPage,
-    ProfilePage
+    ProfilePage,
+    SignUpPage,
+    SeeProfilePage,
+    ModifyProfilePage
   ],
   providers: [
     StatusBar,

@@ -8,6 +8,11 @@
 
   <ion-navbar>
     <ion-title>Mi Perfil</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="goToEditPage()">
+        <ion-icon name="create"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -22,17 +27,17 @@
 
     <ion-item>
       <h3>Nombre y Apellido</h3>
-      <p></p>
+      <p>{{userData.firstName}} {{userData.lastName}}</p>
     </ion-item>
 
     <ion-item>
       <h3>Email</h3>
-      <p></p>
+      <p>{{userData.email}}</p>
     </ion-item>
 
     <ion-item>
       <h3>Nombre de usuario</h3>
-      <p></p>
+      <p>{{userData.username}}</p>
     </ion-item>
   </ion-list>
 
