@@ -132,10 +132,10 @@ export class ProductsProvider {
     })
   }
 
-  appendUrl(arr){
-    for(let i=0; i<arr.length;i++){
-      arr[i].image = this.getConfig.getURL() + arr[i].image
-    }
+  appendUrl(arr) {
+    arr.forEach(e => {
+      e.image.url = this.getConfig.getURL() + e.image.url; 
+    });
   }
 
 }

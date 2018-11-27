@@ -23,7 +23,7 @@
     <ion-list>
         <ion-item *ngFor="let product of prodCh.products; let i = index ">
             <ion-thumbnail item-start (click)="gotoDetail(i)">
-              <img [src]="product.image">
+              <img [src]="product.image.url">
             </ion-thumbnail>
             <h2>{{product.name}}</h2>
             <p>por {{product.vendor}}</p>
