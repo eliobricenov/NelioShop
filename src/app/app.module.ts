@@ -36,6 +36,8 @@ import { ModifyProfilePage } from '../pages/modify-profile/modify-profile';
 import { ImagesProvider } from '../providers/images/images';
 import { HomePageModule } from '../pages/home/home.module';
 import { SignUpPageModule } from '../pages/sign-up/sign-up.module';
+import { CommentProvider } from '../providers/comment/comment';
+import { CommentChangerProvider } from '../providers/comment-changer/comment-changer';
 
 @NgModule({
   declarations: [
@@ -84,7 +86,9 @@ import { SignUpPageModule } from '../pages/sign-up/sign-up.module';
   FileTransfer,
   File,
   Camera,
-    ImagesProvider
+    ImagesProvider,
+    CommentProvider,
+    CommentChangerProvider
   ]
 })
 export class AppModule {}
