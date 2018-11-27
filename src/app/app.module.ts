@@ -38,6 +38,7 @@ import { HomePageModule } from '../pages/home/home.module';
 import { SignUpPageModule } from '../pages/sign-up/sign-up.module';
 import { CommentProvider } from '../providers/comment/comment';
 import { CommentChangerProvider } from '../providers/comment-changer/comment-changer';
+import { LoadProvider } from '../providers/load/load';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import { CommentChangerProvider } from '../providers/comment-changer/comment-cha
   Camera,
     ImagesProvider,
     CommentProvider,
-    CommentChangerProvider
+    CommentChangerProvider,
+    LoadProvider
   ]
 })
 export class AppModule {}

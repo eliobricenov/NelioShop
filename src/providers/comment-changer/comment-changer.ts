@@ -24,9 +24,10 @@ public comms:any = [];
     return -1
    }
 
-   updateComm(d, i){
+   updateComm(d, i, u){
     let index = this.findComm(i)
-    this.comms[index]=d;
+    this.comms[index].text=d;
+    this.comms[index].updated = u;
    }
 
    deleteComm(i){
@@ -40,7 +41,7 @@ public comms:any = [];
    }
 
    createComm(d){
-     this.comms.push(d);
+     this.comms.unshift(d);
    }
 
    getByIndex(i){

@@ -1,3 +1,5 @@
+import { ToasterProvider } from './../../providers/toaster/toaster';
+import { LoadProvider } from './../../providers/load/load';
 import { ImagesProvider } from './../../providers/images/images';
 import { ProductsProvider } from './../../providers/products/products';
 import { Component } from '@angular/core';
@@ -32,17 +34,17 @@ export class AddProductPage {
     categoryId: '',
     quantity: '',
     image: '',
-    vendor: ''
+    vendor: '',
+    updateImage: false
   }
 
-  loader: any
 
   constructor(private transfer: FileTransfer,
     private camera: Camera,
-    public loadingCtrl: LoadingController,
     public navCtrl: NavController, public navParams: NavParams,
     public mc: ModalController, public prodService: ProductsProvider,
-    public actionSheetCtrl: ActionSheetController, public imageProvider: ImagesProvider) {
+    public actionSheetCtrl: ActionSheetController, public imageProvider: ImagesProvider,
+  public loader:LoadProvider, public toast:ToasterProvider ) {
   }
 
   ionViewDidLoad() {
@@ -63,22 +65,42 @@ export class AddProductPage {
 
   confirm(){
 
-    console.log(this.product.image);
+    this.loader.present()
     
     if (!this.navParams.get('edit')) {
       this.prodService.create(this.product).then(
         (res: any) => {
+          this.loader.dismiss()
+          this.toast.present({
+            content: 'Publicación creada!',
+            duration: 2000
+          })
           this.navCtrl.pop()
           console.log(res)
         }, (err) => {
+          this.loader.dismiss()
+          this.toast.present({
+            content: err,
+            duration: 2000
+          })
           console.log(err)
         })
     } else {
       this.prodService.update(this.product).then(
         (res: any) => {
+          this.loader.dismiss()
+          this.toast.present({
+            content: 'Publicación actualizada!',
+            duration: 2000
+          })
           this.navCtrl.pop()
           console.log(res)
         }, (err) => {
+          this.loader.dismiss()
+          this.toast.present({
+            content: err,
+            duration: 2000
+          })
           console.log(err)
         })
     }
@@ -95,6 +117,7 @@ export class AddProductPage {
     console.log(options);
 
     this.camera.getPicture(options).then((imageData) => {
+      this.product.updateImage = true;
       console.log("GOT IT")
       console.log(imageData)
       this.imageFileName = 'data:image/jpeg;base64,' + imageData;
@@ -118,17 +141,12 @@ export class AddProductPage {
     this.camera.getPicture(options).then((imageData) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
+      this.product.updateImage = true;
       this.imageFileName = 'data:image/jpeg;base64,' + imageData;
       this.product.image = this.imageFileName;
     }, (err) => {
       // Handle errory
     });
-  }
-  uploadFile() {
-    let loader = this.loadingCtrl.create({
-      content: "Cargando imagen..."
-    });
-    loader.present();
   }
 
   actionPresent() {

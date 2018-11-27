@@ -36,7 +36,7 @@ export class CommentProvider {
   update(data) {
     return this.setUp(next => {
       this.http.put(this.baseUrl + data.id + "/", data, this.httpOptions).subscribe((res: any) => {
-        this.commCh.updateComm(data, res.data.id);
+        this.commCh.updateComm(res.data.text, data.id, res.data.updated);
         next(res.data)
       });
     });

@@ -1,3 +1,4 @@
+import { LoadProvider } from './../../providers/load/load';
 import { ProductDetailPage } from './../product-detail/product-detail';
 import { AddProductPage } from './../add-product/add-product';
 import { ProductChangerProvider } from './../../providers/product-changer/product-changer';
@@ -5,6 +6,7 @@ import { ProductsProvider } from './../../providers/products/products';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ActionSheetController } from 'ionic-angular';
 import { ModalController } from 'ionic-angular';
+import { ToasterProvider } from '../../providers/toaster/toaster';
 
 /**
  * Generated class for the MyProductsPage page.
@@ -20,7 +22,8 @@ import { ModalController } from 'ionic-angular';
 })
 export class MyProductsPage {
 
-  constructor(public actionSheetCtrl:ActionSheetController, public modalCtrl:ModalController, public navCtrl: NavController, public navParams: NavParams, public prodService:ProductsProvider, public prodCh:ProductChangerProvider) {
+  constructor(public actionSheetCtrl:ActionSheetController, public modalCtrl:ModalController, public navCtrl: NavController, public navParams: NavParams, public prodService:ProductsProvider, public prodCh:ProductChangerProvider,
+  public toast:ToasterProvider, public loader:LoadProvider) {
   }
 
   ionViewDidLoad() {
@@ -84,11 +87,20 @@ export class MyProductsPage {
   }
 
   deleteProduct(id){
+    this.loader.present();
     this.prodService.delete(id).then(
       (res: any) => {
-        console.log(res); 
+        this.toast.present({
+          message: 'Publicación eliminada!',
+          duration: 2000
+        })
+        console.log(res);
       },
       (err: any) => {
+        this.toast.present({
+          message: err,
+          duration: 2000
+        })
         console.log(err);
       });
   }
