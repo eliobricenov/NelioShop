@@ -1,8 +1,12 @@
+import { ProductsProvider } from './../products/products';
+import { ProductChangerProvider } from './../product-changer/product-changer';
+import { LoadProvider } from './../load/load';
 import { CartChangerProvider } from './../cart-changer/cart-changer';
 import { GetConfigProvider } from './../get-config/get-config';
 import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ToasterProvider } from '../toaster/toaster';
 
 /*
   Generated class for the CartProvider provider.
@@ -18,24 +22,30 @@ export class CartProvider {
   token: any;
   
 
-  constructor(private http: HttpClient, private storage: Storage, getConfig:GetConfigProvider, private cartCh:CartChangerProvider) {
+  constructor(private http: HttpClient, private storage: Storage, getConfig:GetConfigProvider, 
+    private cartCh:CartChangerProvider, public toast:ToasterProvider, public load:LoadProvider,
+  public prodCh:ProductChangerProvider, public prodProvider:ProductsProvider) {
     console.log('Cart Service called');
     this.baseUrl = getConfig.getURL() + "cart";
   }
 
   create(id, quantity) {
+    let json = {
+      productId: id,
+      quantity: quantity
+    }
     return this.setUp(next => {
-      this.http.post(this.baseUrl, id, this.httpOptions).subscribe( (res:any) => {
-        this.cartCh.createCartProd(res.data);
+      this.http.post(this.baseUrl, json, this.httpOptions).subscribe( (res:any) => {
+        this.cartCh.createCartProd(id, quantity);
         next(res);
       });
     })
   }
 
-  update(id, quantity) {
+  update(data) {
     return this.setUp(next => {
-     this.http.put(this.baseUrl+"/"+id+"/", quantity, this.httpOptions).subscribe( (res:any) => {
-      this.cartCh.updateCartProd(id,res.data.id);
+     this.http.put(this.baseUrl+"/"+data.id+"/", data, this.httpOptions).subscribe( (res:any) => {
+      this.cartCh.updateCartProd(data.productId,data.quantity);
       next(res.data)
       } );
     });
@@ -43,8 +53,8 @@ export class CartProvider {
 
   delete(data) {
     return this.setUp(next => {
-      this.http.delete(this.baseUrl + "/" + data.id + "/", this.httpOptions).subscribe((res: any) => {
-        this.cartCh.deleteCartProd(data.id)
+      this.http.delete(this.baseUrl + "/" + data+ "/", this.httpOptions).subscribe((res: any) => {
+        this.cartCh.deleteCartProd(data)
         next(res)
       });
     })
@@ -53,7 +63,20 @@ export class CartProvider {
   read() {
     this.setUp(next => {
       this.http.get(this.baseUrl, this.httpOptions).subscribe((res: any) => {
+        console.log("Da",res)
         this.cartCh.readCartProds(res.data);
+      });
+    })
+  }
+
+  checkout() {
+    return this.setUp((next,reject) => {
+      this.http.post(this.baseUrl+"/buy", [], this.httpOptions).subscribe( (res:any) => {
+        this.cartCh.cart=[];
+        this.cartCh.total=0;
+        next(res);
+      }, err =>{
+        reject(err);
       });
     })
   }
@@ -70,7 +93,7 @@ export class CartProvider {
               'Authorization': `Bearer ${this.token}`
             }
           }
-          callback(next);
+          callback(next,error);
         })
         .catch(err => {})
     });

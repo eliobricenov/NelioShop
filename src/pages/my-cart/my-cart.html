@@ -13,4 +13,25 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+  <ion-list *ngIf="cartCh.cart.length > 0">
+    <ion-item *ngFor="let product of cartCh.cart; let i = index " (click)="gotoDetail(i)" (press)="presentActionSheet(i)">
+      <h2>{{product.name}}</h2>
+      <h3>Cantidad: {{product.added}}</h3>
+      <p>P/U: {{product.price}} BsS.</p>
+      <h3 item-end>{{product.added * product.price}} BsS.</h3>
+    </ion-item>
+    <ion-item>
+      <h2>Total</h2>
+      <h3 item-end> {{cartCh.total}} BsS. </h3>
+    </ion-item>
+  </ion-list>
+
+  <ion-title *ngIf="cartCh.cart.length == 0">
+    <h1>No has agregado nada</h1>
+  </ion-title>
+  <ion-fab bottom right *ngIf="cartCh.cart.length > 0" (click)="checkout()">
+    <button ion-fab>
+      <ion-icon name="card"></ion-icon>
+    </button>
+  </ion-fab>
 </ion-content>

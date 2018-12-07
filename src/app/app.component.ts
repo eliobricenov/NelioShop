@@ -1,3 +1,4 @@
+import { CartChangerProvider } from './../providers/cart-changer/cart-changer';
 import { SearchPage } from './../pages/search/search';
 import { MyProductsPage } from './../pages/my-products/my-products';
 import { MyCartPage } from './../pages/my-cart/my-cart';
@@ -25,7 +26,8 @@ export class MyApp {
   user: any;
   @ViewChild('profile') profileImg: any;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, public storage: Storage, public menuchange:MenuChangerProvider) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
+     public storage: Storage, public menuchange:MenuChangerProvider, public cartCh:CartChangerProvider) {
     this.initializeApp();
 
     // TESTING
@@ -47,6 +49,8 @@ export class MyApp {
       { title: 'Mi Carrito', component: MyCartPage },
       { title: 'Mis publicaciones', component: MyProductsPage},
     ];
+
+    this.cartCh.cart =[];
 
   }
 

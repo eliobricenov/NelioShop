@@ -60,6 +60,9 @@
       <button *ngIf="menuCh.user.id == c.personId" ion-button icon-only clear item-end (click)="actionSheet(i)">
         <ion-icon name="more"></ion-icon>
       </button>
+      <button *ngIf="mine && !(menuCh.user.id == c.personId)" ion-button icon-only clear item-end (click)="deleteComment(i)">
+        <ion-icon name="close"></ion-icon>
+      </button>
     </ion-item>
   </ion-list>
 

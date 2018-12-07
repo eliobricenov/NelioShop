@@ -40,10 +40,11 @@ export class ProductDetailPage {
   quantity:any = 1;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public commCh: CommentChangerProvider, public commProvider:CommentProvider, public menuCh:MenuChangerProvider, 
-    public alertCtrl:AlertController, public actionSheetCtrl:ActionSheetController, public loadCtrl:LoadProvider, public toast:ToasterProvider) {
+    public alertCtrl:AlertController, public actionSheetCtrl:ActionSheetController, public loadCtrl:LoadProvider, public toast:ToasterProvider,
+  public cartProvider:CartProvider) {
     this.product = navParams.get('product');
     this.mine = navParams.get('mine');
-    console.log(this.product)
+    console.log(this.product, this.mine)
   }
 
   ionViewDidLoad() {
@@ -55,6 +56,29 @@ export class ProductDetailPage {
   }
 
   addToCart(){
+    if(this.quantity <= this.product.quantity){
+      this.loadCtrl.present();
+      this.cartProvider.create(this.product.id, this.quantity).then((res:any)=>{
+        console.log(res);
+        this.loadCtrl.dismiss()
+        this.toast.present({
+          message: 'Producto agregado al carrito!',
+          duration: 2000
+        })
+      }, (err)=>{
+        console.log(err)
+        this.loadCtrl.dismiss()
+        this.toast.present({
+          message: err,
+          duration: 2000
+        })
+      })
+    }else{
+      this.toast.present({
+        message: 'No hay suficientes unidades en existencia',
+        duration: 2000
+      })
+    }
   }
 
   dismiss(){
@@ -148,23 +172,7 @@ export class ProductDetailPage {
           text: 'Eliminar',
           role: 'destructive',
           handler: () => {
-            this.loadCtrl.present();
-            let commentId = this.commCh.getByIndex(i).id;
-            this.commProvider.delete(commentId).then((res:any)=>{
-              console.log(res)
-              this.loadCtrl.dismiss()
-              this.toast.present({
-                message: 'Comentario eliminado!',
-                duration: 2000
-              })
-            }, (err)=>{
-              this.loadCtrl.dismiss()
-              this.toast.present({
-                message: err,
-                duration: 2000
-              })
-              console.log(err)
-            })
+            this.deleteComment(i);
           }
         },
         {
@@ -178,6 +186,26 @@ export class ProductDetailPage {
     });
  
     acS.present();
+  }
+
+  deleteComment(i){
+    this.loadCtrl.present();
+    let commentId = this.commCh.getByIndex(i).id;
+    this.commProvider.delete(commentId).then((res:any)=>{
+      console.log(res)
+      this.loadCtrl.dismiss()
+      this.toast.present({
+        message: 'Comentario eliminado!',
+        duration: 2000
+      })
+    }, (err)=>{
+      this.loadCtrl.dismiss()
+      this.toast.present({
+        message: err,
+        duration: 2000
+      })
+      console.log(err)
+    })
   }
 
 }

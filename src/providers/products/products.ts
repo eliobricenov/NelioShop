@@ -37,6 +37,7 @@ export class ProductsProvider {
   }
 
   update(data) {
+    console.log(data)
     return this.setUp(next => {
       this.http.put(this.baseUrl + data.id + "/", data, this.httpOptions).subscribe((res: any) => {
         this.appendUrl(data)
@@ -56,7 +57,7 @@ export class ProductsProvider {
   }
 
   read() {
-    this.setUp(next => {
+    return this.setUp(next => {
 
       console.log(this.token)
       this.http.get(this.baseUrl, this.httpOptions).subscribe((res: any) => {
@@ -64,6 +65,7 @@ export class ProductsProvider {
         this.appendUrl(res.data)
         this.prodCh.readProds(res.data);
         console.log(res.data);
+        next();
       }, (err) => {
         console.log(err)
       });
@@ -73,7 +75,9 @@ export class ProductsProvider {
   getByName(name) {
     this.setUp(next => {
       this.http.get(this.baseUrl + "search?name=" + name, this.httpOptions).subscribe((res: any) => {
+        console.log(res.data);
         this.appendUrl(res.data)
+        console.log(res.data,"Append")
         this.prodCh.readProds(res.data);
       });
     })
@@ -134,7 +138,9 @@ export class ProductsProvider {
 
   appendUrl(arr) {
     arr.forEach(e => {
+      console.log(e);
       e.image.url = this.getConfig.getURL() + e.image.url; 
+      console.log(e);
     });
   }
 

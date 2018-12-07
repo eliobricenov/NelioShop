@@ -29,6 +29,7 @@
       <ion-item-divider color="light">Navegar</ion-item-divider>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         <p>{{p.title}}</p>
+        <ion-badge *ngIf="p.title == 'Mi Carrito' && cartCh.cart" item-end>{{cartCh.cart.length}}</ion-badge>
       </button>
       <ion-item-divider color="light"></ion-item-divider>
       <button ion-button full menuClose (click)="myProfile()" >
